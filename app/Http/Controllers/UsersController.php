@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendReminder;
+
 use App\Models\Appointments;
 use App\Models\Contacts;
 use Illuminate\Http\Request;
 use App\Models\Files;
-use Carbon\Carbon;
-use Illuminate\Console\Scheduling\Schedule;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
@@ -27,7 +26,13 @@ class UsersController extends Controller
 
     public function appointment()
     {
-        return view('book-appointment');
+        $appointments = [];
+        if (Auth::user()->hasRole('user')) {
+            $appointments = Appointments::where('user_id', Auth::user()->id)->get();
+        } else {
+            $appointments = Appointments::get();
+        }
+        return view('book-appointment')->with('appointments', $appointments);
     }
 
     public function savefile(Request $request)
@@ -35,14 +40,14 @@ class UsersController extends Controller
         $uploadedFile = $request->file('upload');
         $file = new Files();
         $identifier = uniqid();
-        $extension = $request->file('file')->getClientOriginalExtension();
+        $extension = $request->file('upload')->getClientOriginalExtension();
         $file->name = $identifier;
         $file->mimeType = $extension;
         $file->original_name = $uploadedFile->getClientOriginalName();
         $file->user()->associate(auth::user());
         $file->save();
         $uploadedFile->storeAs('uploads', $identifier . '.' . $extension, 'public');
-        return view('thanks')->with('message', 'File uploaded successfully');
+        return redirect()->route('manage-document');
     }
 
     public function savecontact(Request $request)
@@ -67,25 +72,35 @@ class UsersController extends Controller
 
     public function viewappointment()
     {
-        $appointments = Appointments::where('user_id', Auth::user()->id)->get();
-        return view('appointments')->with('appointments', $appointments);
+        $appointments = [];
+        if (Auth::user()->hasRole('user')) {
+            $appointments = Appointments::where('user_id', Auth::user()->id)->get();
+        } else {
+            $appointments = Appointments::get();
+        }
+        //   $appointments = Appointments::where('user_id', Auth::user()->id)->get();
+        return view('manage-appointments')->with('appointments', $appointments);
     }
 
     public function saveappointment(Request $request)
     {
         $appointment = new Appointments($request->all());
         $appointment->user()->associate(Auth::user());
+        $appointment->channel = "Physical";
+        $appointment->details = "amebo meeting";
         $appointment->save();
-        $schedule = new Schedule();
-        $reminder = $request->reminder;
+        Alert::success('Appointment booked successfully');
+        return redirect('/dashboard');
+        // $schedule = new Schedule();
+        // $reminder = $request->reminder;
 
-        $dateTime = date($reminder);
+        // $dateTime = date($reminder);
         // return $dateTime;
-        $reminder =  Carbon::create($dateTime)->format('m-d-Y H:i:s');
+        //   $reminder =  Carbon::create($dateTime)->format('m-d-Y H:i:s');
         //  return $reminder;
         // $reminder=Carbon::date('Y-m-d H:i:S',$request->reminder);
-        $schedule->job(new SendReminder())->monthlyOn($reminder);
-        return view('thanks')->with('message', "Your appointment have been booked successfully");
+        // $schedule->job(new SendReminder())->monthlyOn($reminder);
+        //  return view('thanks')->with('message', "Your appointment have been booked successfully");
     }
 
     public function files()
@@ -97,5 +112,15 @@ class UsersController extends Controller
     public function file($id)
     {
         return view('file-upload');
+    }
+
+    public function documents()
+    {
+        if (Auth::user()->hasRole('user')) {
+            $documents = Files::where('user_id', Auth::user()->id)->get();
+        } else {
+            $documents = Files::get();
+        }
+        return view('manage-document')->with('documents', $documents);
     }
 }

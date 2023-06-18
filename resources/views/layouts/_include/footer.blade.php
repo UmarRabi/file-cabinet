@@ -16,11 +16,11 @@
                         </span>
                     </a>
 
-                    <button class="btn btn-blue bg-blue" style="">
+                    <a href="{{ route('logout') }}" class="btn btn-blue bg-blue" style="">
                         <span>
                             Logout
                         </span>
-                    </button>
+                    </a>
                 </form>
             </div>
         @endif

@@ -1,58 +1,6 @@
 @extends('layouts.dashboard')
 @section('contents')
     <section>
-        <div class="container-fluid d-flex align-items-center" id="hero-section"
-            style="background-image: linear-gradient(90deg,rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.1)),url({{ asset('assets/img/banner.png') }}); background-repeat:no-repeat; background-size:cover; background-postion:top right; min-height:400px;position: relative">
-            @if (Auth::user())
-                <div class="row justify-content-end"
-                    style="position: absolute;
-                    bottom: 0;
-                    min-width:100%;
-                    border: 1px solid red;">
-                    <div class="col-7">
-
-                        <form class="d-flex flex-sm-vertical">
-
-                            <div class="dropdown px-1">
-                                <a href="{{ route('signup') }}" class="btn"
-                                    style="color:#A52B7B !important; background:white; min-width:200px" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Auto Reminders
-                                </a>
-                            </div>
-                            <div class="dropdown px-1">
-                                <a href="{{ route('upload-document') }}" class="btn btn-blue"
-                                    style="color:#A52B7B !important; background:white; min-width:200px" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Upload Document
-                                </a>
-                            </div>
-                            <div class="dropdown px-1">
-                                <a href="{{ route('manage-document') }}" class="btn"
-                                    style="color:#A52B7B !important; background:white; min-width:200px" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Manage Document
-                                </a>
-                            </div>
-                            <div class="dropdown px-1">
-                                <a href="{{ route('login') }}" class="btn"
-                                    style="color:#A52B7B !important; background:white; min-width:200px" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Book Appointment
-                                </a>
-                            </div>
-
-
-
-                            {{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}
-                        </form>
-                    </div>
-                </div>
-            @endif
-            {{-- <div class="container" style=""> --}}
-
-            {{-- </div> --}}
-        </div>
         <div class="row m-5">
 
             <div class="col-xl-4 col-md-4 col-sm-12 p-5">
