@@ -16,11 +16,11 @@ class UserSeeder extends Seeder
     {
         //
         $data = [
-            'email' => "admin@clerkapplication.com",
+            'email' => "admin@filescabinet.com",
             'password' => Hash::make("Password@1"),
             'name' => "Admin"
         ];
         $user = User::create($data);
-        $user->assignRole([2]);
+        $user->assignRole([1]);
     }
 }

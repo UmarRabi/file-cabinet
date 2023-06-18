@@ -1,16 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.dashboard')
 @section('contents')
     <section>
-        <div class="row d-flex justify-content:space-betweenn"
-            style="background-image: linear-gradient(90deg,rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.1)),url({{ asset('assets/img/register-banner.png') }}); background-repeat:no-repeat; background-size:covor; background-postion:center;height:300px;">
-            <div class="container mt-5 py-5">
-                <h2 style="margin-left: 20%;; color:white;font-weight:bolder;">
-                    Register
-                </h2>
-                <hr style="width: 5px;height:300px;background:white;">
-
-            </div>
-        </div>
         <div class="container mx-5 px-5 d-flex justify-content-center">
             <div class="card col-xl-7 col-md-5 col-sm-12">
                 @if ($errors->any())
@@ -67,9 +57,15 @@
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div> --}}
                         <div class="form-group m-4">
-                            <label for="exampleInputPassword1">Confirm Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1"
-                                placeholder="confirm password" name="password_confirmation">
+                            <label for="exampleInputPassword1">Role</label>
+                            <select type="password" class="form-control" id="exampleInputPassword1"
+                                placeholder="confirm password" name="role">
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">
+                                        {{ $role->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                             @error('password_confirmation')
                                 <small id="emailHelp" class="form-text text-muted">
                                     {{ $message }}
