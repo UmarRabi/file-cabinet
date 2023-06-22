@@ -1,10 +1,9 @@
-@extends('layouts.dashboard')
+@extends('layouts.main')
 @section('contents')
     <section>
-        <div class="row m-5">
-
-            <div class="col-xl-4 col-md-4 col-sm-12 p-5">
-                <svg width="329" height="686" viewBox="0 0 329 686" fill="none" xmlns="http://www.w3.org/2000/svg"
+        <div class="row">
+            <div class="col-xl-4 col-md-4 col-sm-12 m-2">
+                <svg width="inherit" height="686" viewBox="0 0 329 686" fill="none" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink">
                     <rect width="329" height="686" fill="url(#pattern0)" />
                     <defs>
@@ -18,11 +17,8 @@
                 </svg>
 
             </div>
-            <div class="col-xl-8 col-md-8 col-sm-12 p-5">
-                <svg width="924" height="493" viewBox="0 0 924 493" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="924" height="493" fill="#061E5C" fill-opacity="0.6" />
-                </svg>
-
+            <div class="col-xl-7 col-md-7 col-sm-12 m-2">
+                <img style="max-width:-webkit-fill-available;" src="{{ asset('assets/img/cabinet.png') }}" alt="">
             </div>
         </div>
     </section>

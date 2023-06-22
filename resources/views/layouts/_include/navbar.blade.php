@@ -1,4 +1,4 @@
-        <div class="container-fluid d-flex align-items-center" id="hero-section"
+        {{-- <div class="container-fluid d-flex align-items-center" id="hero-section"
             style="background-image: linear-gradient(90deg,rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.1)),url({{ asset('assets/img/banner.png') }}); background-repeat:no-repeat; background-size:cover; background-postion:top right; min-height:400px;position: relative">
             @if (Auth::user())
                 <div class="row justify-content-end"
@@ -52,4 +52,17 @@
                     </div>
                 </div>
             @endif
+        </div> --}}
+
+        <div class="container-fluid d-flex align-items-center" id="hero-section"
+            style="background-image: linear-gradient(90deg,rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.1)),url({{ asset('website/images/hero-section.jpg') }}); background-repeat:no-repeat; background-size:cover; background-postion:top right">
+            <div class="container">
+                <h1 class="font-weight-bold text-white text-uppercase mb-4">Transform Your Career...</h1>
+                <h3 class="text-white mb-5">Get work exprience on digital projects <br /> launch your career within
+                    months.</h3>
+                <a target="_blank" href="{{ $config->btn_banner_link }}"
+                    class="btn btn-acuk-orange px-3 rounded-0 font-weight-bold">{{ $config->btn_banner_label }}</a>
+                <a href="{{ route('courses') }}" class="btn btn-acuk-red px-3 rounded-0 font-weight-bold">Find
+                    Course</a>
+            </div>
         </div>

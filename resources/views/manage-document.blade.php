@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.main')
 @section('contents')
     <style>
         .text-span {
@@ -12,7 +12,7 @@
     </style>
     <section>
         <div class="row m-5 justify-content-center">
-            <div class="col-xl-8 col-sm-12 m-5 p-5" style=" border: 5px solid #061e5c;">
+            <div class="col-xl-8 col-sm-12 m-5 p-5" style="">
                 <form class="d-flex flex-lg-row flex-sm-column">
                     <div class="dropdown px-1">
                         <a href="{{ route('upload-document') }}" class="btn btn-blue"

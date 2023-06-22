@@ -1,73 +1,40 @@
 <html>
+@include('layouts._include.header')
 
-<head>
-    <title></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-    <style>
-        .password-p {
-            font-size: 20px;
-            font-weight: 600;
-            width: inherit;
-        }
-
-        /* a {
-            color: white !important
-        } */
-
-        .nav>li {
-            color: white !important;
-        }
-
-        .navbar-light .navbar-brand {
-            color: white !important;
-        }
-
-        .blue-text {
-            color: #061e5c;
-        }
-
-        .blue-bg,
-        .btn-blue {
-            background-color: #061e5c;
-            color: white;
-
-        }
-
-        .btn {
-            width: 200px
-        }
-
-        .navbar-light .navbar-nav .nav-link.active,
-        .navbar-light .navbar-nav .show>.nav-link {
-            color: white !important;
-        }
-
-        .navbar-light .navbar-nav .nav-link {
-            color: white;
-        }
-
-        .btn-xx-amaze {
-            width: 90%;
-        }
-
-        .dropdown-toggle {
-            background: white;
-            color: black;
-        }
-
-        .paginate_button,
-        .page-link {
-            color: black !important;
-        }
-    </style>
-</head>
-
-<body style="min-width: 100vw;">
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown link
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container-fluid d-flex align-items-center" id="hero-section"
         style="background-image: linear-gradient(90deg,rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.96),rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.1)),url({{ asset('assets/img/banner.png') }}); background-repeat:no-repeat; background-size:cover; background-postion:top right; min-height:400px;position: relative">
         @if (Auth::user()->hasRole('user'))
