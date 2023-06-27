@@ -62,9 +62,8 @@ Route::get('/admin-portal', function () {
 //     });
 // });
 
-Route::get('/admin', function () {
-    return view('admin');
-});
+
+
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', function () {
@@ -80,6 +79,12 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::get('/create', [UsersController::class, 'form'])->name('users.create');
         Route::post("/", [UsersController::class, 'save'])->name('users.save');
     });
+    Route::get("/admin/reminder", function () {
+        return view('admin-reminder');
+    })->name('admin-reminder');
+    Route::get("/file/status", function () {
+        return view('upload-status');
+    })->name('file-status');
     Route::prefix('/appointments')->group(function () {
         Route::get('/', [UsersController::class, 'appointment'])->name('appointment');
         Route::get('/view', [UsersController::class, 'viewappointment'])->name('view-appointment');

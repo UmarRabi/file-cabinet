@@ -1,4 +1,4 @@
-<footer>
+<footer style="position:relative;bottom:0;">
     <div class="row justify-content-end">
         @if (Auth::user())
             <div class="col-7">

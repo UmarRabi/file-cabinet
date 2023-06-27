@@ -6,14 +6,24 @@
                 <form action="{{ route('save-appointment') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="form-group m-3 col-3">
-                            <input type="text" name="title" class="form-control">
+                        <div class="form-group col-xl-4 col-sm-12">
+                            <input type="text" placeholder="Details" name="title" class="form-control">
                         </div>
-                        <div class="form-group m-3 col-3">
+                        <div class="form-group col-xl-4 col-sm-12">
                             <input type="date" name="booked_date" class="form-control">
                         </div>
-                        <div class="form-group m-3 col-3">
+                        <div class="form-group col-xl-4 col-sm-12">
                             <input type="time" name="booked_time" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="form-group  col-xl-4 col-sm-12">
+                            <input type="text" placeholder="Channel (Zoom, Meet, Team etc)" name="channel"
+                                class="form-control">
+                        </div>
+                        <div class="form-group  col-xl-4 col-sm-12">
+                            <textarea placeholder="Details (link)" name="details" class="form-control">
+                            </textarea>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-blue">

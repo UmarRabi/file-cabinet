@@ -15,7 +15,7 @@
             <div class="col-xl-8 col-sm-12 m-5 p-5" style="">
                 <form class="d-flex flex-lg-row flex-sm-column">
                     <div class="dropdown px-1">
-                        <a href="{{ route('upload-document') }}" class="btn btn-blue"
+                        <a href="{{ route('upload-document') }}" class="btn btn-primary"
                             style="color:#061e5c !important; background:white; min-width:300px" aria-haspopup="true"
                             aria-expanded="false">
                             Upload Document

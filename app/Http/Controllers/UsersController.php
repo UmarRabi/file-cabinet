@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Jobs\SendReminder;
 use App\Models\Appointments;
 use App\Models\Contacts;
 use Illuminate\Http\Request;
 use App\Models\Files;
+use Carbon\Carbon;
+use Illuminate\Console\Scheduling\Schedule;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,10 +45,12 @@ class UsersController extends Controller
         $extension = $request->file('upload')->getClientOriginalExtension();
         $file->name = $identifier;
         $file->mimeType = $extension;
+        $file->file_category = $request->file_category;
         $file->original_name = $uploadedFile->getClientOriginalName();
         $file->user()->associate(auth::user());
         $file->save();
-        $uploadedFile->storeAs('uploads', $identifier . '.' . $extension, 'public');
+        Alert::success("File Uploaded successfully");
+        $uploadedFile->storeAs('uploads/' . $request->file_category, $identifier . '.' . $extension, 'public');
         return redirect()->route('manage-document');
     }
 
@@ -86,20 +90,19 @@ class UsersController extends Controller
     {
         $appointment = new Appointments($request->all());
         $appointment->user()->associate(Auth::user());
-        $appointment->channel = "Physical";
-        $appointment->details = "amebo meeting";
+        $appointment->channel = $request->channel;
+        $appointment->details = $request->details;
         $appointment->save();
+        $schedule = new Schedule();
+        $reminder = $request->reminder;
+        $dateTime = date($reminder);
+        // return $dateTime;
+        $reminder =  Carbon::create($dateTime)->format('m-d-Y H:i:s');
+        // return $reminder;
+        $reminder = Carbon::date('Y-m-d H:i:S', $request->reminder);
+        $schedule->job(new SendReminder())->monthlyOn($reminder);
         Alert::success('Appointment booked successfully');
         return redirect('/dashboard');
-        // $schedule = new Schedule();
-        // $reminder = $request->reminder;
-
-        // $dateTime = date($reminder);
-        // return $dateTime;
-        //   $reminder =  Carbon::create($dateTime)->format('m-d-Y H:i:s');
-        //  return $reminder;
-        // $reminder=Carbon::date('Y-m-d H:i:S',$request->reminder);
-        // $schedule->job(new SendReminder())->monthlyOn($reminder);
         //  return view('thanks')->with('message', "Your appointment have been booked successfully");
     }
 
@@ -117,7 +120,9 @@ class UsersController extends Controller
     public function documents()
     {
         if (Auth::user()->hasRole('user')) {
-            $documents = Files::where('user_id', Auth::user()->id)->get();
+            $documents = Files::where('user_id', Auth::user()->id)
+                ->orderBy('id', 'DESC')
+                ->get();
         } else {
             $documents = Files::get();
         }

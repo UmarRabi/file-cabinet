@@ -59,6 +59,10 @@
             color: #061e5c;
         }
 
+        section {
+            height: -webkit-fill-available;
+        }
+
         .blue-bg,
         .btn-blue {
             background-color: #061e5c;
