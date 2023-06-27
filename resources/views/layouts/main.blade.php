@@ -32,8 +32,8 @@
                             <i class="fas fa-bars"></i>
                         </button>
 
-                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav pull-right">
+                        <div class="collapse navbar-collapse " id="navbarNavDropdown">
+                            <ul class="navbar-nav d-flex flex-xl-row-reverse flex-sm-column" style="width: 100%;">
                                 @if (Auth::guest())
                                     <li class="nav-item mx-2">
                                         <a class="nav-link active" aria-current="page"
@@ -48,19 +48,31 @@
                                     </li>
                                 @endif
                                 @if (Auth::user())
-                                    <li class="nav-item mr-4">
-                                        <a class="nav-link active" aria-current="page" href="">Auto Reminder</a>
-                                    </li>
-                                    <li class="nav-item mr-4">
-                                        <a class="nav-link" href="{{ route('upload-document') }}">Upload Document</a>
-                                    </li>
-                                    <li class="nav-item mr-4">
-                                        <a class="nav-link" href="{{ route('manage-document') }}">Manage Document</a>
-                                    </li>
-                                    <li class="nav-item mr-4">
-                                        <a class="nav-link" href="{{ route('appointment') }}">Book Appointment</a>
-                                    </li>
                                     <a class="btn btn-danger" href="{{ route('logout') }}">Logout</a>
+                                    @if (Auth::user()->hasRole('user'))
+                                        <li class="nav-item mr-4">
+                                            <a href="{{ route('user-reminder') }}" class="nav-link active"
+                                                aria-current="page" href="">Auto Reminder</a>
+                                        </li>
+                                        <li class="nav-item mr-4">
+                                            <a class="nav-link" href="{{ route('upload-document') }}">Upload
+                                                Document</a>
+                                        </li>
+                                        <li class="nav-item mr-4">
+                                            <a class="nav-link" href="{{ route('manage-document') }}">Manage
+                                                Document</a>
+                                        </li>
+                                        <li class="nav-item mr-4">
+                                            <a class="nav-link" href="{{ route('appointment') }}">Book Appointment</a>
+                                        </li>
+                                    @else
+                                        <li class="nav-item mr-4">
+                                            <a href="{{ route('users.list') }}" class="nav-link active"
+                                                aria-current="page" href="">Users</a>
+                                        </li>
+                                    @endif
+
+
                                 @endif
 
                             </ul>

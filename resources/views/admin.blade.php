@@ -42,12 +42,12 @@
                             Book Appointment
                         </a>
                     </div>
-                    <div class="row justify-content-center py-3">
+                    {{-- <div class="row justify-content-center py-3">
                         <a href="{{ route('admin-reminder') }}" class="btn"
                             style="background: #D9D9D9;height:70px; width:80% !important">
                             Auto Reminder
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-xl-10 col-md-10 col-sm-12" style="background: #D9D9D9;">
                     <div class="row justify-content-center my-5">

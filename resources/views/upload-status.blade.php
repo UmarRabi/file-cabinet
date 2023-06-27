@@ -100,20 +100,47 @@
                     <div class="row mx-3" style="background: #94A8CF; min-height:100%; min-width:100%;">
                         <div class="row mx-5 my-5" style="height: fit-content;">
                             <div class="col-5" style="background: #061E5C;">
-                                <h4 style="color: #FFF" class="d-flex justify-content-center">Collate Document</h4>
+                                <h4 style="color: #FFF" class="d-flex justify-content-center">
+                                    {{ $file->file_category == 'mp'
+                                        ? 'Monthly Payroll'
+                                        : ($file->file_category == 'qv'
+                                            ? 'Quarterly VAT'
+                                            : ($file->file_category == 'ar'
+                                                ? 'Annual Revenue'
+                                                : '')) }}
+                                </h4>
+
                             </div>
+                            <h5 class="my-4 row">
+                                <a href="{{ asset('storage/' . $file->path) }}">
+                                    {{ $file->original_name }}
+                                </a>
+
+                            </h5>
+
+                            @if (Auth::user()->hasRole('admin'))
+                                <h5 class="my-4 row">
+
+                                    {{ $file->user->email }}
+                                </h5>
+                            @endif
+
+
                         </div>
 
                         <div class="row flex-column-reverse">
                             @if (Auth::user()->hasRole('admin'))
-                                <form action="">
+                                <form action="{{ route('change-file-status') }}" method="POST">
                                     @csrf
                                     <div class="col-xl-5 col-md-5 col-sm-12">
                                         <div class="form-group">
-                                            <select name="" id="" class="form-control">
-                                                <option value="1">Approve</option>
-                                                <option value="0">Reject</option>
+                                            <select id="" class="form-control" name="status">
+                                                <option {{ $file->status == 1 ? 'selected' : '' }} value="1">Approve
+                                                </option>
+                                                <option {{ $file->status == 0 ? 'selected' : '' }} value="0">Not
+                                                    Approved</option>
                                             </select>
+                                            <input type="hidden" value="{{ $file->id }}" name="file_id">
                                         </div>
                                         <div class="form-group">
                                             <button class="btn btn-blue bg-blue">
@@ -126,7 +153,9 @@
                             @else
                                 <div class="row mx-5 my-5" style="height: fit-content;">
                                     <div class="col-5" style="background: #061E5C;">
-                                        <h4 style="color: #FFF" class="d-flex justify-content-center">Collate Document</h4>
+                                        <h4 style="color: #FFF" class="d-flex justify-content-center">
+                                            {{ $file->status == 1 ? 'Approved' : 'Not Approved' }}
+                                        </h4>
                                     </div>
                                 </div>
                             @endif

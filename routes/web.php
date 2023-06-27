@@ -75,16 +75,20 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::post('/upload', [UsersController::class, 'savefile'])->name('savefile');
     Route::get('/documents', [UsersController::class, 'documents'])->name('manage-document');
     Route::prefix("/user")->group(function () {
-        Route::get("/", [UsersController::class, 'index'])->name('users.list');
+        Route::get("/", [UsersController::class, 'users'])->name('users.list');
         Route::get('/create', [UsersController::class, 'form'])->name('users.create');
         Route::post("/", [UsersController::class, 'save'])->name('users.save');
     });
-    Route::get("/admin/reminder", function () {
-        return view('admin-reminder');
-    })->name('admin-reminder');
-    Route::get("/file/status", function () {
-        return view('upload-status');
-    })->name('file-status');
+    Route::get("/user/reminder", [UsersController::class, 'userReminder'])
+        ->name('user-reminder');
+    Route::get("/admin/reminder/{id}", [UsersController::class, 'adminReminder'])
+        ->name('admin-reminder');
+    Route::post('/reminder/save', [UsersController::class, 'saveReminder'])
+        ->name('save-reminder');
+    Route::get("/file/{id}", [UsersController::class, 'viewFile'])
+        ->name('view-file');
+    Route::post("/file/status", [UsersController::class, 'changeFileStatus'])
+        ->name('change-file-status');
     Route::prefix('/appointments')->group(function () {
         Route::get('/', [UsersController::class, 'appointment'])->name('appointment');
         Route::get('/view', [UsersController::class, 'viewappointment'])->name('view-appointment');
